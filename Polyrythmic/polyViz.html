@@ -1,59 +1,42 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Polyrythm</title>
-    </head>
-    <body>
-        <canvas id="myCanvas" style="background-color: black;"></canvas>
-        <script src=polyClasses.js></script>
-        <script src=polySounds.js></script>
-
-        <script>
-            const size = 700;
-            myCanvas.width = size;
-            myCanvas.height = size / 2;
-
-            const trackCenter = { x: size / 2, y: size / 2};
-            const trackMinRadius = 50;
-            const trackStep = 15;
-            const ballRadius = 5;
-            const ballMinSpeed = 0.01;
-            const ballStep = -.0001;
- 
-            //sound variation
-            const soundFrequencies = [
-            1760, 1567.98, 1396.91, 1318.51, 1174.66, 1046.5, 987.77, 880,
-            783.99, 698.46, 659.25, 587.33, 523.25, 493.88, 440, 392, 349.23,
-            329.63, 293.66, 261.63
-            ];
-
-            //making multiple track and ball pairs
-            const tracks = [];
-            const balls = [];
-            const pairs = 20;
-            
-            for(let i = 0; i < pairs; i++) {
-                const trackRadius = trackMinRadius + i * trackStep;
-                const ballSpeed = ballMinSpeed + i * ballStep;
-                const hue = (i * 360) / pairs;
-                const ballSoundFrequency = soundFrequencies[i];
-                const track = new Track(trackCenter, trackRadius, hue);
-                const ball = new Ball(track, ballRadius, ballSpeed, ballSoundFrequency, hue);
-                tracks.push(track);
-                balls.push(ball);
-            }
-
-            const ctx = myCanvas.getContext("2d");
-
-            animate();
-
-            function animate() {
-                ctx.clearRect(0, 0, size, size);
-                tracks.forEach((track) => track.draw(ctx));
-                balls.forEach((ball) => ball.move(ctx));
-                balls.forEach((ball) => ball.draw(ctx));
-                requestAnimationFrame(animate);
-            }    
-        </script>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polyrythm</title>
+    <link rel="stylesheet" href="polyStyles.css">
+</head>
+<body>
+    <h1>Polyrythm</h1>
+    <canvas id="myCanvas"></canvas>
+    <div class="button-container">
+        <!-- Color Buttons -->
+        <div class="button-column">
+            <button class="color-button">Color 1</button>
+            <button class="color-button">Color 2</button>
+            <button class="color-button">Color 3</button>
+        </div> 
+        <!-- Speed Buttons -->
+        <div class="button-column">
+            <button class="color-button">Speed 1</button>
+            <button class="color-button">Speed 2</button>
+            <button class="color-button">Speed 3</button>
+        </div>
+        <!-- Sound Buttons -->
+        <div class="button-column">
+            <button class="sound-button">Sound 1</button>
+            <button class="sound-button">Sound 2</button>
+            <button class="sound-button">Sound 3</button>
+        </div>
+        <!-- Shape Buttons -->
+        <div class="button-column">
+            <button class="shape-button">Shape 1</button>
+            <button class="shape-button">Shape 2</button>
+            <button class="shape-button">Shape 3</button>
+        </div>
+    </div>
+    <script src="polyClasses.js"></script>
+    <script src="polySounds.js"></script>
+    <script src="polyMain.js"></script>
+</body>
 </html>
