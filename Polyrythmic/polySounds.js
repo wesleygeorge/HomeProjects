@@ -1,18 +1,43 @@
 const audioCtx =  new (window.AudioContext || window.webkitAudioContext)();
 
-function playsound(frequency = 440, duration = 2) {
-    const osc = audioCtx.createOscillator();
-    const envelope = audioCtx.createGain();
-    osc.connect(envelope);
-    envelope.connect(audioCtx.destination);
+function playSound(frequencies = [440], duration = 2) {
+        // Ensure frequencies is an array
+        if (!Array.isArray(frequencies)) {
+            frequencies = [frequencies]; 
+        }
+        frequencies.forEach(frequency => {
+        const osc = audioCtx.createOscillator();
+        const envelope = audioCtx.createGain();
 
-    //change the gain over time for each beep to make it sound nicer
-    envelope.gain.setValueAtTime(0, audioCtx.currentTime);
-    envelope.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + .05);
-    envelope.gain.linearRampToValueAtTime(0, audioCtx.currentTime + duration);
+        osc.connect(envelope);
+        envelope.connect(audioCtx.destination);
 
-    osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+        // Smoothly adjust the gain (volume) over time
+        envelope.gain.setValueAtTime(0, audioCtx.currentTime);
+        envelope.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.05);
+        envelope.gain.linearRampToValueAtTime(0, audioCtx.currentTime + duration);
 
-    osc.start();
-    osc.stop(audioCtx.currentTime + duration);
+        osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+    });
 }
+
+
+// function playsound(frequency = 440, duration = 2) {
+//     const osc = audioCtx.createOscillator();
+//     const envelope = audioCtx.createGain();
+//     osc.connect(envelope);
+//     envelope.connect(audioCtx.destination);
+
+//     //change the gain over time for each beep to make it sound nicer
+//     envelope.gain.setValueAtTime(0, audioCtx.currentTime);
+//     envelope.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + .05);
+//     envelope.gain.linearRampToValueAtTime(0, audioCtx.currentTime + duration);
+
+//     osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+
+//     osc.start();
+//     osc.stop(audioCtx.currentTime + duration);
+// }

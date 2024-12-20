@@ -51,7 +51,7 @@ class Ball {
         this.center = { x: res.x, y: res.y };
         this.progress = res.progress;
         if (res.round != this.round) {
-            playsound(this.soundFrequency);
+            playSound(this.soundFrequency);
             this.round = res.round;
         }
     }
