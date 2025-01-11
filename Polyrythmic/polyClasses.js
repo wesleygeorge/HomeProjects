@@ -1,15 +1,19 @@
 class Track {
-    constructor(center, radius, hue) {
+    constructor(center, radius, hue, cosFrequency = 1, sinFrequency = 1, phaseShift = 0) {
         this.center = center;
         this.radius = radius;
+        this.cosFrequency = cosFrequency;
+        this.sinFrequency = sinFrequency;
+        this.phaseShift = phaseShift;
         this.period = Math.PI;
         this.hue = hue;
     }
 
     getPosition(offset) {
         return {
-            x: this.center.x + Math.cos(offset) * this.radius,
-            y: this.center.y - Math.abs(Math.sin(offset) * this.radius),
+            x: this.center.x + Math.cos(offset * this.cosFrequency) * this.radius,
+            y: this.center.y - Math.abs(Math.sin(offset * this.sinFrequency + this.phaseShift) * this.radius),
+//            y: this.center.y - Math.sin(offset * this.sinFrequency + this.phaseShift) * this.radius,
             round: Math.floor(offset / this.period),
             progress: (offset % this.period) / this.period
         };
@@ -17,8 +21,8 @@ class Track {
 
     draw(ctx) {
         ctx.beginPath();
-        for (let a = 0; a < Math.PI * 2; a += .01) {
-            const pos = this.getPosition(a);
+        for (let offset = 0; offset < Math.PI * 2; offset += .01) {
+            const pos = this.getPosition(offset, this.cosFrequency, this.sinFrequency);
             ctx.lineTo(pos.x, pos.y);
         }
         ctx.closePath();
@@ -50,12 +54,17 @@ class Ball {
         const res = this.track.getPosition(this.offset);
         this.center = { x: res.x, y: res.y };
         this.progress = res.progress;
-        if (res.round != this.round) {
+        const epsilon = 0.035; // Tolerance for comparison
+        if(Math.abs(Math.sin(this.offset * this.track.sinFrequency + this.track.phaseShift)) < epsilon){
             playSound(this.soundFrequency);
-            this.round = res.round;
         }
+        // if (res.round != this.round) {
+        //     playSound(this.soundFrequency);
+        //     this.round = res.round;
+        // }
     }
 
+    //I need to fix the white bits, too. Something like progress % Math.PI >= 0???
     draw(ctx) {
         ctx.beginPath();
         ctx.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2);

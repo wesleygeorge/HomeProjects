@@ -43,25 +43,29 @@ h1 {
     font-size: 1rem;
 }
 
-.button-column .color-button {
+.color-button {
     background-color: #e63946;
     color: white;
 }
-.button-column .speed-button {
+.speed-button {
     background-color: #3942e6;
     color: white;
 }
 
-.button-column .sound-button {
+.sound-button {
     background-color: #457b9d;
     color: white;
 }
 
-.button-column .shape-button {
+.shape-button {
     background-color: #2a9d8f;
     color: white;
 }
 
 .button-column button:hover {
     opacity: 0.8;
+}
+#shapeSlider {
+    width: 100%; /* Adjust width as needed */
+    margin-top: 10px;
 }

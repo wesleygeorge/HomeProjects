@@ -1,8 +1,9 @@
 //Making canvas
 const size = 700;
+let canvasHeight = 2;
 const myCanvas = document.getElementById("myCanvas");
 myCanvas.width = size;
-myCanvas.height = size / 2;
+myCanvas.height = size / canvasHeight;
 
 //Making track and ball variables
 const trackCenter = { x: size / 2, y: size / 2 };
@@ -85,6 +86,18 @@ document.getElementById("soundButton2").addEventListener("click", function() {ch
 document.getElementById("soundButton3").addEventListener("click", function() {changeTone(harmonicLayers.fourToneLayers)});
 document.getElementById("soundButton4").addEventListener("click", function() {changeTone(harmonicLayers.fiveToneLayers)});
 document.getElementById("soundButton5").addEventListener("click", resetTone);
+//I have to get the sin, cos and phase values and send them to reset the tracks. How do I only send the value for each one without having to send the one for the others?
+document.getElementById("sinFrequency").addEventListener("input", (event) => {
+    resetSinFrequency(event.target.value);
+});
+document.getElementById("cosFrequency").addEventListener("input", (event) => {
+    resetCosFrequency(event.target.value);
+});
+document.getElementById("phaseShift").addEventListener("input", (event) => {
+    console.log(parseInt(event.target.value));
+    resetPhaseShift(parseInt(event.target.value));
+});
+
 
 animate();
 
@@ -158,7 +171,7 @@ function resetBallSpeed() {
 });
 }
 
-//Sound Functions
+//Sound functions
 function changeTone(layerName) {
     balls.forEach((ball, index) => {
         ball.soundFrequency = layerName[index % layerName.length];
@@ -171,4 +184,56 @@ function resetTone() {
         ball.soundFrequency = soundFrequencies[index % soundFrequencies.length];
         console.log("This is the ball's frequency " + ball.soundFrequency);
     });
+}
+
+//Shape functions
+function resetSinFrequency(sinFrequency) {
+    tracks.forEach((track) => {
+        track.sinFrequency = sinFrequency;
+        console.log("This is the track's new sin frequency " + track.sinFrequency);
+    });
+}
+
+function resetCosFrequency(cosFrequency) {
+    tracks.forEach((track) => {
+        track.cosFrequency = cosFrequency;
+        console.log("This is the track's new cos frequency " + track.cosFrequency);
+    });
+}
+
+function resetPhaseShift(phaseShift) {
+    switch(phaseShift) {
+        case 0:
+            tracks.forEach((track) => {
+            track.phaseShift = 0;
+            console.log("This is the track's new phase shift " + track.phaseShift);
+            });
+            break;
+        case 1:
+            tracks.forEach((track) => {
+            track.phaseShift = Math.PI / 4;
+            console.log("This is the track's new phase shift " + track.phaseShift);
+            });
+            break;
+        case 2:
+            tracks.forEach((track) => {
+            track.phaseShift = Math.PI / 2;
+            console.log("This is the track's new phase shift " + track.phaseShift);
+            });
+            break;
+        case 3:
+            tracks.forEach((track) => {
+            track.phaseShift = (3 * Math.PI) / 4;
+            console.log("This is the track's new phase shift " + track.phaseShift);
+            });
+            break;
+        case 4:
+            tracks.forEach((track) => {
+            track.phaseShift = Math.PI;
+            console.log("This is the track's new phase shift " + track.phaseShift);
+            });
+            break;
+        default:
+            console.error("Invalid slider value");
+    }
 }

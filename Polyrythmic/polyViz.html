@@ -7,36 +7,47 @@
     <link rel="stylesheet" href="polyStyles.css">
 </head>
 <body>
-    <h1>Polyrythm</h1>
-    <canvas id="myCanvas"></canvas>
-    <div class="button-container">
-        <!-- Color Buttons -->
-        <div class="button-column">
-            <button id="colorButton1" class="color-button">Change Track Color</button>
-            <button id="colorButton2" class="color-button">Change Ball Color</button>
-            <button id="colorButton3" class="color-button">Go Disco</button>
-        </div> 
-        <!-- Speed Buttons -->
-        <div class="button-column">
-            <button id="speedButton1" class="speed-button">Faster</button>
-            <button id="speedButton2" class="speed-button">Slower</button>
-            <button id="speedButton3" class="speed-button">Reset</button>
+    <header>
+        <h1>Polyrythm</h1>
+    </header>
+    <main>
+        <canvas id="myCanvas"></canvas>
+        <div class="control-panel">
+                        <!-- Shape Sliders -->
+            <section class="slider-group">
+                <h2>Shapes</h2>
+                <label for="cosFrequency">Adjust Cos Frequency:</label>
+                <input id="cosFrequency" type="range" min="1" max="10" value="1">
+                <label for="sinFrequency">Adjust Sin Frequency:</label>
+                <input id="sinFrequency" type="range" min="1" max="10" value="1">
+                <label for="phaseShift">Adjust Phase Shift:</label>
+                <input id="phaseShift" type="range" min="0" max="4" value="0" step="1">
+            </section>
+            <!-- Color Buttons -->
+            <section class="button-group">
+                <h2>Colors</h2>
+                <button id="colorButton1" class="color-button">Change Track Color</button>
+                <button id="colorButton2" class="color-button">Change Ball Color</button>
+                <button id="colorButton3" class="color-button">Go Disco</button>
+            </section>
+            <!-- Speed Buttons -->
+            <section class="button-group">
+                <h2>Speed</h2>
+                <button id="speedButton1" class="speed-button">Faster</button>
+                <button id="speedButton2" class="speed-button">Slower</button>
+                <button id="speedButton3" class="speed-button">Reset</button>
+            </section>
+            <!-- Sound Buttons -->
+            <section class="button-group">
+                <h2>Sounds</h2>
+                <button id="soundButton1" class="sound-button">Two Tone</button>
+                <button id="soundButton2" class="sound-button">Three Tone</button>
+                <button id="soundButton3" class="sound-button">Four Tone</button>
+                <button id="soundButton4" class="sound-button">Five Tone</button>
+                <button id="soundButton5" class="sound-button">Reset</button>
+            </section>
         </div>
-        <!-- Sound Buttons -->
-        <div class="button-column">
-            <button id="soundButton1" class="sound-button">Two Tone</button>
-            <button id="soundButton2" class="sound-button">Three Tone</button>
-            <button id="soundButton3" class="sound-button">Four Tone</button>
-            <button id="soundButton4" class="sound-button">Five Tone</button>
-            <button id="soundButton5" class="sound-button">Reset</button>
-        </div>
-        <!-- Shape Buttons -->
-        <div class="button-column">
-            <button id="shapeButton1" class="shape-button">Shape 1</button>
-            <button id="shapeButton2" class="shape-button">Shape 2</button>
-            <button id="shapeButton3" class="shape-button">Shape 3</button>
-        </div>
-    </div>
+    </main>
     <script src="polyClasses.js"></script>
     <script src="polySounds.js"></script>
     <script src="polyMain.js"></script>
