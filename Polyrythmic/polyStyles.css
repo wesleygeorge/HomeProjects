@@ -111,6 +111,7 @@ button:hover {
 /* Sliders */
 input[type="range"] {
     width: 90%;
+    appearance: none; 
     -webkit-appearance: none;
     height: 8px;
     background: #444;
