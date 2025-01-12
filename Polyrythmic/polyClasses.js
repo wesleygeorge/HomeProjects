@@ -13,7 +13,8 @@ class Track {
         return {
             x: this.center.x + Math.cos(offset * this.cosFrequency) * this.radius,
             y: this.center.y - Math.abs(Math.sin(offset * this.sinFrequency + this.phaseShift) * this.radius),
-//            y: this.center.y - Math.sin(offset * this.sinFrequency + this.phaseShift) * this.radius,
+            //To switch to full screen mode (have to amend canvasHeight, as well)
+            //y: this.center.y - Math.sin(offset * this.sinFrequency + this.phaseShift) * this.radius,
             round: Math.floor(offset / this.period),
             progress: (offset % this.period) / this.period
         };
@@ -45,10 +46,6 @@ class Ball {
         this.center = this.track.getPosition(this.offset);
     }
 
-    // pickRandomSoundFreq() {
-        //randomly pick from the array of sounds every time the ball hits the wall.        
-    // }
-
     move() {
         this.offset += this.speed;
         const res = this.track.getPosition(this.offset);
@@ -58,22 +55,22 @@ class Ball {
         if(Math.abs(Math.sin(this.offset * this.track.sinFrequency + this.track.phaseShift)) < epsilon){
             playSound(this.soundFrequency);
         }
+        //This is for the half circles and is exact, not requiring the tolerance epsilon to handle the float issues.
         // if (res.round != this.round) {
         //     playSound(this.soundFrequency);
         //     this.round = res.round;
         // }
     }
 
-    //I need to fix the white bits, too. Something like progress % Math.PI >= 0???
     draw(ctx) {
         ctx.beginPath();
         ctx.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2);
         ctx.strokeStyle = "white";
-        let lightness = 50;
-        if (this.progress >= 0 && this.progress < 0.1) {
+        let lightness = 50;        
+        if (this.progress >= 0 && this.progress < 0.075) {
             // Gradually decrease from 100 to 50 in the first 10% of the period
             lightness = 100 - 500 * this.progress;
-        } else if (this.progress >= 0.1 && this.progress < 1) {
+        } else if (this.progress >= 0.075 && this.progress < 1) {
             // Stay at 50 for the rest of the period
             lightness = 50;
         } else if (this.progress === 1) {

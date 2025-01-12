@@ -1,71 +1,136 @@
+/* General Styles */
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #121212;
-    color: white;
+    background-color: #1c1c1e; /* Darker background */
+    color: #f2f2f7; /* Light text */
+    line-height: 1.6;
 }
 
 h1 {
     margin: 20px 0;
-    font-size: 2rem;
-    color: #ffcc00;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffcc00; /* Gold accent */
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #d1d1d6; /* Subtle gray */
+    border-bottom: 2px solid #444; /* Divider for section headers */
+    padding-bottom: 5px;
+}
+
+/* Canvas */
 #myCanvas {
-    background-color: black;
+    width: 80%;
+    height: 300px;
+    background-color: #000;
+    border-radius: 10px;
     border: 2px solid #ffcc00;
-    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+    margin: 20px 0;
+    display: block; /* Ensures it's treated as a block element */
+    margin: 0 auto; /* Centers the canvas horizontally */
 }
 
-.button-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    width: 70%;
+/* Control Panel */
+.control-panel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    width: 90%;
+    padding: 20px;
+    background-color: #2c2c2e;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
-.button-column {
+/* Button Group */
+.button-group, .slider-group {
+    flex: 1 1 calc(25% - 20px); /* 4 columns with spacing */
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #3a3a3c;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-.button-column button {
-    margin: 10px 0;
-    padding: 10px 20px;
+.button-group h2, .slider-group h2 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: #f2f2f7;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
 }
 
 .color-button {
-    background-color: #e63946;
-    color: white;
+    background: linear-gradient(135deg, #e63946, #ff7675);
 }
+
 .speed-button {
-    background-color: #3942e6;
-    color: white;
+    background: linear-gradient(135deg, #3942e6, #6a5ff8);
 }
 
 .sound-button {
-    background-color: #457b9d;
-    color: white;
+    background: linear-gradient(135deg, #457b9d, #62c5ce);
 }
 
 .shape-button {
-    background-color: #2a9d8f;
-    color: white;
+    background: linear-gradient(135deg, #2a9d8f, #62dfa6);
 }
 
-.button-column button:hover {
-    opacity: 0.8;
+button:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
 }
-#shapeSlider {
-    width: 100%; /* Adjust width as needed */
-    margin-top: 10px;
+
+/* Sliders */
+input[type="range"] {
+    width: 90%;
+    -webkit-appearance: none;
+    height: 8px;
+    background: #444;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ffcc00;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease-in-out;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
 }

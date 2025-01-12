@@ -15,7 +15,6 @@ const ballStep = -0.0001;
 let goDiscoActive = false;
 let discoAnimationID;
 
-
 // Sound variation
 const soundFrequencies = [
     1760, 1567.98, 1396.91, 1318.51, 1174.66, 1046.5, 987.77, 880,
@@ -73,8 +72,8 @@ for (let i = 0; i < pairs; i++) {
 
 const ctx = myCanvas.getContext("2d");
 
-// //Initializing buttons
 // Attach event listeners
+// Buttons
 document.getElementById("colorButton1").addEventListener("click", changeTrackHue);
 document.getElementById("colorButton2").addEventListener("click", changeBallHue);
 document.getElementById("colorButton3").addEventListener("click", toggleDisco);
@@ -86,7 +85,7 @@ document.getElementById("soundButton2").addEventListener("click", function() {ch
 document.getElementById("soundButton3").addEventListener("click", function() {changeTone(harmonicLayers.fourToneLayers)});
 document.getElementById("soundButton4").addEventListener("click", function() {changeTone(harmonicLayers.fiveToneLayers)});
 document.getElementById("soundButton5").addEventListener("click", resetTone);
-//I have to get the sin, cos and phase values and send them to reset the tracks. How do I only send the value for each one without having to send the one for the others?
+// Sliders
 document.getElementById("sinFrequency").addEventListener("input", (event) => {
     resetSinFrequency(event.target.value);
 });
@@ -175,14 +174,12 @@ function resetBallSpeed() {
 function changeTone(layerName) {
     balls.forEach((ball, index) => {
         ball.soundFrequency = layerName[index % layerName.length];
-            console.log("This is the ball's frequency " + ball.soundFrequency);
     });
 }
 
 function resetTone() {
     balls.forEach((ball, index) => {
         ball.soundFrequency = soundFrequencies[index % soundFrequencies.length];
-        console.log("This is the ball's frequency " + ball.soundFrequency);
     });
 }
 
@@ -190,14 +187,12 @@ function resetTone() {
 function resetSinFrequency(sinFrequency) {
     tracks.forEach((track) => {
         track.sinFrequency = sinFrequency;
-        console.log("This is the track's new sin frequency " + track.sinFrequency);
     });
 }
 
 function resetCosFrequency(cosFrequency) {
     tracks.forEach((track) => {
         track.cosFrequency = cosFrequency;
-        console.log("This is the track's new cos frequency " + track.cosFrequency);
     });
 }
 
@@ -206,31 +201,26 @@ function resetPhaseShift(phaseShift) {
         case 0:
             tracks.forEach((track) => {
             track.phaseShift = 0;
-            console.log("This is the track's new phase shift " + track.phaseShift);
             });
             break;
         case 1:
             tracks.forEach((track) => {
             track.phaseShift = Math.PI / 4;
-            console.log("This is the track's new phase shift " + track.phaseShift);
             });
             break;
         case 2:
             tracks.forEach((track) => {
             track.phaseShift = Math.PI / 2;
-            console.log("This is the track's new phase shift " + track.phaseShift);
             });
             break;
         case 3:
             tracks.forEach((track) => {
             track.phaseShift = (3 * Math.PI) / 4;
-            console.log("This is the track's new phase shift " + track.phaseShift);
             });
             break;
         case 4:
             tracks.forEach((track) => {
             track.phaseShift = Math.PI;
-            console.log("This is the track's new phase shift " + track.phaseShift);
             });
             break;
         default:
